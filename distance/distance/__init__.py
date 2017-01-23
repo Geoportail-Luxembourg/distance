@@ -11,9 +11,11 @@ def main(global_config, **settings):
     """
     config = Configurator(settings=settings)
     config.include('pyramid_chameleon')
+    config.add_route('ws_home', '/webservice')
+    config.add_route('startpoints', '/webservice/startpoints')
+    config.add_route('stops', '/stops')
+    config.add_route('distance', '/webservice/{stops}')
     config.add_route('home', '/')
-    config.add_route('startpoints', '/startpoints')
-    config.add_route('distance', '/{stops}')
     config.scan()
     engine = engine_from_config(settings, 'sqlalchemy.')
     config.add_static_view('static', 'static', cache_max_age=3600)

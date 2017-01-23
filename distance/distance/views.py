@@ -3,10 +3,23 @@ from .models import Distance, DBSession
 from sqlalchemy import and_
 from pyramid.renderers import render_to_response
 
-@view_config(route_name='home', renderer='templates/home.pt')
+
+@view_config(route_name='home', renderer='templates/index.pt')
 def home(request):
     return {}
 
+
+@view_config(route_name='ws_home', renderer='templates/home.pt')
+def ws_home(request):
+    return {}
+
+@view_config(route_name='stops', renderer='json')
+def stops(request):
+    result = DBSession.query(Distance.from_name).distinct()
+    stops = []
+    for r in result:
+        stops.append({'name': r.from_name})
+    return {'records': stops}
 
 @view_config(route_name='startpoints', renderer='templates/distance.pt')
 def startpoints(request):
@@ -38,9 +51,15 @@ def topoints(request, from_name):
                               s,
                               request=request)
 
-@view_config(route_name='distance', renderer='json')
-def distance(request):
 
+@view_config(route_name='distance')
+def distance(request):
+    if 'format' in request.params and request.params['format']=='text':
+        return render_to_response('string',_get_distance(request,False),request=request)
+    else:
+        return render_to_response('json',_get_distance(request,True),request=request)
+
+def _get_distance(request,as_json=True):
     stops = request.matchdict['stops'].split(":")
     if len(stops)<2:
                 return topoints(request, stops[0])
@@ -57,4 +76,7 @@ def distance(request):
             _straight += result.straight
             _distance += result.length
             i += 1
-    return {'from': _from, 'to': _to, 'straight': _straight, 'calculated': _distance}
+    if as_json:
+        return {'from': _from, 'to': _to, 'straight': _straight, 'calculated': _distance}
+    else:
+        return _distance

@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<title>Calcul interactif d'hectométrage pour frais de routes</title> 
+
+
+<link rel="stylesheet" type="text/css" href="static/ext-3.3.0/resources/css/ext-all.css">
+<link rel="stylesheet" type="text/css" href="static/fr.css">
+<script type="text/javascript" src="static/ext-3.3.0/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="static/ext-3.3.0/ext-all.js"></script>
+<script type="text/javascript" src="static/carte_distance.js"></script>
+ 
+</head> 
+<body>
+<center>Nouveau calcul de distances basé sur les données publiées ici:
+    <a href="https://data.public.lu/en/datasets/matrice-des-distances-sur-routes-nationales-et-cr/">data.public.lu</a>
+</center>
+            <div id="panel" class="centerdiv"></div> 
+</body> 
+</html> 

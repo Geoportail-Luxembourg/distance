@@ -1,0 +1,159 @@
+* {
+margin: 0;
+font-size:8pt;
+font-family: VERDANA;
+color:#003466;
+}
+html, body {
+height: 100%;
+
+}
+h1{
+font-size: 120%;
+}
+ul ,li{list-style-type: circle;
+   list-style-position: inside;
+   margin: 50;}
+
+a:visited {
+color:#6F78BB;
+}
+
+a, a:link {
+color:#021398;
+}   
+   
+
+   
+.centerdiv{
+
+  width: 800px   ;
+  margin-left: auto ;
+  margin-right: auto ;
+}
+
+.explicdiv{
+  width: 500px ;
+  margin-left: auto ;
+  margin-right: auto ;
+  text-indent: 10px;
+}
+.table-bottom
+{
+border: 1px solid black;
+}
+.wrapper {
+min-height: 100%;
+height: auto !important;
+height: 100%;
+margin: 0 auto -6em;
+/*width: 980px   ;*/
+display:block;
+max-width:1100px;
+padding: 0 8px 8px;
+margin-left: auto ;
+margin-right: auto ;
+}
+.footer, .push {
+clear: both;
+height: 6em;
+width: 980px   ;
+  margin-left: auto ;
+  margin-right: auto ;
+}
+.footer-right{
+text-align: center;
+}
+/*.content{
+border-left:1px solid #003466;
+border-right:1px solid #003466;
+border-bottom:1px solid #003466;
+}*/
+
+/*!
+ * Ext JS Library 3.3.0
+ * Copyright(c) 2006-2010 Ext JS, Inc.
+ * licensing@extjs.com
+ * http://www.extjs.com/license
+ */
+.x-panel-tl .x-panel-header {
+    color:#fff;
+}
+.x-panel-tc {
+	background-image:url(shared/extjs/images/top-bottom.gif);
+}
+.x-panel-tl {
+	background-image:url(shared/extjs/images/corners-sprite.gif);
+    border-color:#d0d0d0;
+}
+.x-panel-tr {
+	background-image:url(shared/extjs/images/corners-sprite.gif);
+}
+.x-panel-bc {
+	background-image:url(shared/extjs/images/top-bottom.gif);
+}
+.x-panel-bl {
+	background-image:url(shared/extjs/images/corners-sprite.gif);
+}
+.x-panel-br {
+	background-image:url(shared/extjs/images/corners-sprite.gif);
+}
+.x-panel-mc {
+    background:#f1f1f1;
+}
+.x-panel-mc .x-panel-body {
+    background:transparent;
+    border: 0 none;
+}
+.x-panel-mc {
+    background:#f1f1f1;
+}
+.x-panel-mc .x-panel-body {
+    background:transparent;
+    border: 0 none;
+}
+.x-panel-ml {
+	background-image:url(shared/extjs/images/left-right.gif);
+}
+.x-panel-mr {
+	background-image:url(shared/extjs/images/left-right.gif);
+}
+#webHeaderDiv {
+background-image:url(http://map.geoportal.lu/gfx/bandeau.jpg);
+background-position:right top;
+background-repeat:no-repeat;
+height:100px;
+margin:0 0 1px;
+padding:0;
+width:100%;
+}
+.webBlindThis {
+display:inline;
+font-size:0;
+height:0;
+left:-999px;
+line-height:0;
+margin:0;
+overflow:hidden;
+padding:0;
+position:absolute;
+top:-999px;
+width:0;
+}
+#webLogoDiv {
+background-image:url(http://www.act.public.lu/pictures/layout/header/shared/logo.gif);
+background-position:left top;
+background-repeat:no-repeat;
+float:left;
+height:100px;
+width:417px;
+}
+#webServiceNavigationDiv {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:#C2D1E1 none repeat scroll 0 0;
+border-bottom:1px solid #003466;
+height:20px;
+margin:0;
+}
