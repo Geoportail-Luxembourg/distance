@@ -1,8 +1,6 @@
 FROM grahamdumpleton/mod-wsgi-docker:python-2.7
 
 ENV appdir /app
-ENV http_proxy http://cie-vproxy2.cie.etat.lu:8080 
-ENV https_proxy http://cie-vproxy2.cie.etat.lu:8080
 WORKDIR /app
 ##CREATE VIRTUAL ENV
 RUN apt-get update && apt-get install -y python-pip virtualenv unzip
