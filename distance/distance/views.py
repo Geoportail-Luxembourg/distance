@@ -72,7 +72,7 @@ def _get_distance(request,as_json=True):
 
             _from = stops[i-1].lower()
             _to = stops[i].lower()
-            result = DBSession.query(Distance).filter(and_(Distance.from_name == _from), Distance.to_name == _to).one()
+            result = DBSession.query(Distance).filter(and_(Distance._from == _from), Distance._to == _to).one()
             _straight += result.straight
             _distance += result.length
             i += 1
