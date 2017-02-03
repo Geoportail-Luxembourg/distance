@@ -14,7 +14,9 @@ Base = declarative_base()
 
 class Distance( Base):
     __tablename__ = 'distances'
-    from_name = Column(String,primary_key=True)
-    to_name = Column(String,primary_key=True)
+    _from = Column(String,primary_key=True)
+    _to = Column(String,primary_key=True)
+    from_name = Colum(String)
+    to_name = Column(String)
     straight = Column(Float)
     length = Column(Float)
