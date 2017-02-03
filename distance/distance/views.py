@@ -18,7 +18,7 @@ def stops(request):
     result = DBSession.query(Distance.from_name).distinct()
     stops = []
     for r in result:
-        stops.append({'name': r.from_name.title()})
+        stops.append({'name': r.from_name})
     return {'records': stops}
 
 @view_config(route_name='startpoints', renderer='templates/distance.pt')
