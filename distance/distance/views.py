@@ -15,7 +15,7 @@ def ws_home(request):
 
 @view_config(route_name='stops', renderer='json')
 def stops(request):
-    result = DBSession.query(Distance.from_name).distinct()
+    result = DBSession.query(Distance.from_name).distinct().order_by(Distance.from_name.asc())
     stops = []
     for r in result:
         stops.append({'name': r.from_name})
@@ -40,7 +40,7 @@ def topoints(request, from_name):
     s = {}
     s['stops'] = []
     s['from_stop'] = from_name
-    result = DBSession.query(Distance.to_name).distinct()
+    result = DBSession.query(Distance.to_name).distinct().order_by(Distance.from_name.asc())
     for r in result:
         print
         stop ={}
