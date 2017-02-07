@@ -26,7 +26,7 @@ def startpoints(request):
     s = {}
     s['stops']=[]
     s['from_stop']= None
-    result = DBSession.query(Distance.from_name).distinct()
+    result = DBSession.query(Distance.from_name).distinct().order_by(Distance.from_name.asc())
     for r in result:
         print
         stop ={}
