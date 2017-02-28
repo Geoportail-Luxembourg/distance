@@ -14,7 +14,7 @@ def main(global_config, **settings):
     config.add_route('ws_home', '/webservice')
     config.add_route('startpoints', '/webservice/startpoints')
     config.add_route('stops', '/stops')
-    config.add_route('distance', '/webservice/{stops}')
+    config.add_route('distance', '/webservice/{stops:.*}')
     config.add_route('home', '/')
     config.scan()
     engine = engine_from_config(settings, 'sqlalchemy.')
