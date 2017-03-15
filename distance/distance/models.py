@@ -13,7 +13,7 @@ DBSession = scoped_session(sessionmaker())
 Base = declarative_base()
 
 class Distance( Base):
-    __tablename__ = 'distances'
+    __tablename__ = 'distances_shortest'
     _from = Column(String,primary_key=True)
     _to = Column(String,primary_key=True)
     from_name = Column(String)
