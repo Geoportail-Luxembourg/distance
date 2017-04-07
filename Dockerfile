@@ -9,7 +9,7 @@ RUN cd ${appdir} && virtualenv env
 RUN echo alias ll=\'ls -lisa\' >> ~/.bashrc
 RUN /bin/bash -c "source ${appdir}/env/bin/activate && pip install --upgrade pip && pip install --upgrade setuptools"
 COPY app.wsgi ${appdir}
-ADD https://download.data.public.lu/resources/matrice-des-distances-sur-routes-nationales-et-cr/20170407-084048/distances_shortest.zip
+ADD https://download.data.public.lu/resources/matrice-des-distances-sur-routes-nationales-et-cr/20170407-084048/distances_shortest.zip ${appdir}/distances.zip
 RUN unzip ${appdir}/distances.zip
 RUN mv ${appdir}/distances_shortest.sqlite ${appdir}/distances.sqlite
 COPY startup.sh ${appdir}
