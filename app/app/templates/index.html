@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Calcul interactif d'hectométrage pour frais de routes</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/icon.png') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/distance.css') }}">
+    <title>Calcul interactif d'hectométrage pour frais de routes</title>
+</head>
+<body>
+    <div id="govbar" class="govbar">
+        <a href="http://gouvernement.lu" target="_blank" class="govbar-logo" lang="fr" title="Gouvernement du Grand-Duché de Luxembourg (nouvelle fenêtre)">
+          <img src="//cdn.public.lu/pictures/logos/gov/gov-light.png" srcset="//cdn.public.lu/pictures/logos/gov/gov-light-hdpi.png 1.5x,
+              //cdn.public.lu/pictures/logos/gov/gov-light-xhdpi.png 2x,
+              //cdn.public.lu/pictures/logos/gov/gov-light-xxhdpi.png 3x" alt="Gouvernement du Grand-Duché de Luxembourg">
+        </a>
+      <ul class="govbar-links"><li><a class="govbar-link" target="_blank" title="luxembourg.lu (nouvelle fenêtre)" href="http://luxembourg.lu">luxembourg.lu</a></li><li><a class="govbar-link" target="_blank" title="guichet.lu (nouvelle fenêtre)" href="http://guichet.lu">guichet.lu</a></li><li><a class="govbar-link" target="_blank" title="gouvernement.lu (nouvelle fenêtre)" href="http://gouvernement.lu">gouvernement.lu</a></li><li><a class="govbar-link govbar-more" target="_blank" title="L’annuaire des sites internets publics luxembourgeois (nouvelle fenêtre)" href="http://etat.lu/">Autres sites</a></li></ul>
+    </div>
+    <div class="container">
+        <center><h1>Calcul de distances</h1></center><br>
+        <div class="alert alert-warning" id="attention">ATTENTION: L'Internet Explorer n'est plus supporté, veuillez utiliser Firefox ou Chrome!</div>
+        <h4>Sélection des lieux disponibles</h4>
+        <p>
+            <select class="selectpicker" id="stops" size=-1 name="stop" data-live-search="true" onchange="addToTable()"></select>
+            <input class="btn btn-primary" id="deletebtn" type="submit" value="Effacer" onclick="clearTable()">
+        <p>
+        <div id="stopstable" class="hidden">
+            <p>
+                <table class="table table-striped table-bordered" id=table>
+                    <thead class="thead-dark">
+                      <tr>
+                        <th class="text-center">Lieux sélectionnés / Itinéraire:</th>
+                      </tr>
+                    </thead>
+                    <tbody id="trows">
+                    </tbody>
+                    <tfoot class="tfoot-dark">
+                        <tr>
+                            <th class="text-center"></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </p>
+        <div>
+        <div id="result" class="hidden">
+            <div class="alert alert-warning" id="info">Ajoutez des lieux avec le menu en haut à gauche!</div>
+            <p class="distDiv">
+                <span class="distanceCalc">Distance calculée:</span>
+                <input type="text" value="0.00" class="distResult field left" id="distance" readonly>
+                <span class="distanceCalc">km</span>
+            </p>
+            <p>
+                <input class="btn btn-primary" id="printbtn" type="submit" value="Imprimer" data-toggle="modal" data-target="#popup" onclick="printDistance()">
+            </p>
+        <div><br><br>
+        <div id="webservice" class="hidden">
+            <br>
+            <h6>Trouvez nos webservices ici:</h6>
+            <p>
+                <a href="/webservice">Webservice API</a>
+            </p>
+        <div>
+        <div class="modal" id="popup">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Itinéraire</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <p>
+                        <span id="route"></span>
+                        <span id="popupdistance"></span><br>
+                    </p>
+                </div>
+                
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        Nouveau calcul de distances basé sur les données publiées ici: <a href="https://data.public.lu/en/datasets/matrice-des-distances-sur-routes-nationales-et-cr/">data.public.lu</a></br><br>
+        Auteur &copy; <a href="https://www.geoportail.lu/en/about-us/"><img src="{{ url_for('static', filename='img/geoportail.png') }}" style='width:120px;height:25px;'/></a>
+        CC0
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/distance.js') }}"></script>
+</body>
+</html>

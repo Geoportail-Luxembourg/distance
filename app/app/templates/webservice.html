@@ -1,0 +1,144 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Calcul interactif d'hectométrage pour frais de routes</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+    <style>
+        body {padding-bottom: 40px;background-color: #f5f5f5;}
+        h1 {
+            margin-top: 30px;
+        }
+        .container {
+            padding: 19px 29px 29px;
+            margin: 0 auto 20px;
+            font-weight: 300;
+            font-family:Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+                    border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        }
+        .govbar {
+            background: #fff;
+            border-bottom: 1px solid #cccaca;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 12px;
+            position: relative;
+            overflow: hidden;
+            height: 46px;
+            width: 100%;
+            z-index: 30000;
+        }
+        .govbar::before,
+        .govbar::after {
+            content: '';
+            display: table;
+        }
+        .govbar::after {
+            clear: both;
+        }
+        .govbar-logo {
+            border: 0;
+            float: left;
+            padding: 3px 8px;
+        }
+        .govbar-logo.newwindow:after {
+            display: none;
+        }
+        .govbar-logo img {
+            border: 0;
+            display: block;
+            height: 40px;
+        }
+        .govbar-links {
+            float: right;
+            line-height: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .govbar-links li {
+            float: left;
+        }
+        .govbar-link {
+            float: left;
+            font-weight: bold;
+            padding: 8px;
+        }
+        .govbar-link:link,
+        .govbar-link:visited,
+        .govbar-link:hover,
+        .govbar-link:focus,
+        .govbar-link:active {
+            border: 0;
+            color: #222 !important;
+            text-decoration: none;
+        }
+        .govbar-link:hover,
+        .govbar-link:focus {
+            background: #e6e6e6 !important;
+        }
+        .govbar-more {
+            font-weight: normal;
+        }
+    </style>
+    <title>Calcul interactif d'hectométrage pour frais de routes</title>
+
+</head>
+<body>
+    <div id="govbar" class="govbar">
+        <a href="http://gouvernement.lu" target="_blank" class="govbar-logo" lang="fr" title="Gouvernement du Grand-Duché de Luxembourg (nouvelle fenêtre)">
+          <img src="//cdn.public.lu/pictures/logos/gov/gov-light.png" srcset="//cdn.public.lu/pictures/logos/gov/gov-light-hdpi.png 1.5x,
+              //cdn.public.lu/pictures/logos/gov/gov-light-xhdpi.png 2x,
+              //cdn.public.lu/pictures/logos/gov/gov-light-xxhdpi.png 3x" alt="Gouvernement du Grand-Duché de Luxembourg">
+        </a>
+      <ul class="govbar-links"><li><a class="govbar-link" target="_blank" title="luxembourg.lu (nouvelle fenêtre)" href="http://luxembourg.lu">luxembourg.lu</a></li><li><a class="govbar-link" target="_blank" title="guichet.lu (nouvelle fenêtre)" href="http://guichet.lu">guichet.lu</a></li><li><a class="govbar-link" target="_blank" title="gouvernement.lu (nouvelle fenêtre)" href="http://gouvernement.lu">gouvernement.lu</a></li><li><a class="govbar-link govbar-more" target="_blank" title="L’annuaire des sites internets publics luxembourgeois (nouvelle fenêtre)" href="http://etat.lu/">Autres sites</a></li></ul>
+    </div>
+    <h1><center>Distance calculation webservice API</center></h1>
+    <div class="container">
+        <p class="text-justify text-center">
+            <span id="webservice">
+                Please indicate a minimum of stops (localities) to get distance <br>
+                Separate them by a colon (:), e.g Luxembourg:Esch-sur-Alzette <br>
+                You can combine as many stops as you want.<br>
+            </span><br>
+            <span id=examples>
+                <h4><center>Example Use Cases:</center></h4>
+                Get all startpoints: <a href="/webservice/startpoints">/webservice/startpoints</a> <br>
+                Get distance between two or more stops (defaults to json when not specified): <br><a href="/webservice/Luxembourg:Diekirch">/webservice/stop1:stop2</a> <br>
+                <a href="/webservice/Luxembourg:Diekirch?format=json">/webservice/stop1:stop2?format=json</a> or with <br> <a href="/webservice/Luxembourg:Diekirch?format=string">/webservice/stop1:stop2?format=string</a> <br>
+                <a href="/webservice/Luxembourg:Diekirch:Weiswampach">/webservice/stop1: ... :stopN</a><br>
+                <a href="/webservice/Luxembourg:Diekirch:Weiswampach?format=json">/webservice/stop1: ... :stopN?format=json</a> or with <br> <a href="/webservice/Luxembourg:Diekirch:Weiswampach?format=string">/webservice/stop1: ... :stopN?format=string</a><br>
+            </span>
+        <p>
+        <div id="webservice" class="hidden">
+            <br>
+            <h4>Home:</h4>
+            <p>
+                <a href="/">Back</a>
+            </p>
+        <div>
+        <div class="copyright">
+            Auteur &copy; <a href="https://www.geoportail.lu/en/about-us/"><img src="{{ url_for('static', filename='img/geoportail.png') }}" style='width:120px;height:25px;'/></a>
+            CC0
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+</body>
+</html>
