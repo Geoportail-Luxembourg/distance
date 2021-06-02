@@ -2,7 +2,7 @@ blinker==1.4
 Chameleon==3.0
 click==6.7
 inflection==0.3.1
-markdown2==2.3.2
+markdown2==2.4.0
 MarkupSafe==0.23
 Paste==2.0.2
 PasteDeploy==1.5.2
